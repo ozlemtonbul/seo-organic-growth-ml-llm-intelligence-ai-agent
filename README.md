@@ -3,7 +3,7 @@
 | Experience | Link |
 |---|---|
 | Historical SEO Performance Dashboard | [View Dashboard →](https://ozlemtonbul.com/dashboards/seo_dashboard.html) |
-| AI / ML / LLM SEO & GEO Decision Intelligence AI Agent Demo | **Streamlit deployment pending** |
+| AI / ML / LLM SEO & GEO Decision Intelligence AI Agent Demo | [Launch Public Demo →](https://seo-geo-ml-llm-intelligence.streamlit.app/) |
 
 # SEO & GEO Decision Intelligence AI Agent
 
@@ -386,7 +386,7 @@ Current demo dataset:
 
 The public demo does not require production GSC or GA4 credentials and does not expose private client URLs or exact production business values.
 
-**Streamlit URL will be added after deployment.**
+**Live Streamlit Demo:** [Launch Public Demo →](https://seo-geo-ml-llm-intelligence.streamlit.app/)
 
 ---
 
