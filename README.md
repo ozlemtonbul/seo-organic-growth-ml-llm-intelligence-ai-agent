@@ -1,134 +1,242 @@
-﻿# SEO & GEO Decision Intelligence AI Agent
+## 📊 Live Interactive Dashboard
 
-A production-oriented **SEO, GEO, Machine Learning and LLM decision-intelligence platform** that combines Google Search Console, GA4, technical SEO signals, forecasting, scenario simulation, recommendation logic, RAG and a bilingual Streamlit interface.
+| Experience | Link |
+|---|---|
+| Historical SEO Performance Dashboard | [View Dashboard →](https://ozlemtonbul.com/dashboards/seo_dashboard.html) |
+| AI / ML / LLM SEO & GEO Decision Intelligence AI Agent Demo | **Streamlit deployment pending** |
 
-The system is designed to move beyond descriptive SEO reporting and support **forward-looking decisions**: what is likely to happen, where the largest organic-growth opportunities are, which pages deserve action first, and how those decisions can be explained to business stakeholders.
+# SEO & GEO Decision Intelligence AI Agent
 
----
+> **Enterprise AI-Powered Organic Growth Decision Intelligence Platform**
 
-## ğŸ“Š Historical SEO Performance Dashboard
-
-A separate interactive dashboard presents the historical organic-growth and e-commerce performance analysis behind the project, including Google Search Console, GA4 and Semrush-based SEO intelligence.
-
-[**View Historical SEO Dashboard**](https://ozlemtonbul.com/dashboards/seo_dashboard.html)
-
-> The historical dashboard presents business-performance evidence, while this repository focuses on the AI/ML decision-intelligence architecture, multi-horizon forecasting, automation, testing and LLM/RAG capabilities.
-
----
-
-## Highlights
-
-- **Multi-horizon ML forecasting:** 7, 14, 30, 90, 180 and 365 days
-- **Operational + strategic forecasting architecture**
-- **Leakage-safe chronological backtesting**
-- **Pure-ML 90-day impression ensemble**
-- **Guarded strategic ML routing**
-- **Scenario simulation and opportunity intelligence**
-- **Page, keyword, category and content intelligence**
-- **Technical SEO and GEO intelligence**
-- **LLM + RAG decision support**
-- **Turkish / English Streamlit dashboard**
-- **PostgreSQL-ready persistence**
-- **Docker support**
-- **Automated final QA**
-- **Sanitized public demo dataset**
+![Python](https://img.shields.io/badge/Python-3.13-blue)
+![Google Search Console](https://img.shields.io/badge/Google_Search_Console-Integrated-success)
+![GA4](https://img.shields.io/badge/GA4-Integrated-success)
+![Machine Learning](https://img.shields.io/badge/ML-RF%20%7C%20XGBoost%20%7C%20LightGBM-orange)
+![LLM](https://img.shields.io/badge/LLM-Anthropic%20%7C%20OpenAI%20%7C%20Gemini-blueviolet)
+![RAG](https://img.shields.io/badge/RAG-pgvector-informational)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supported-blue)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)
+![Pytest](https://img.shields.io/badge/Final_QA-123%20passed-success)
 
 ---
 
-## Problem
+# Overview
 
-Traditional SEO dashboards mostly explain what already happened.
+SEO & GEO Decision Intelligence is a production-oriented AI and Machine Learning platform for organic-growth decision support.
 
-This project was built to answer more decision-oriented questions:
+The system combines Google Search Console, Google Analytics 4, technical SEO signals, on-page content analysis, forecasting, opportunity intelligence, recommendation logic, LLMs and RAG in a single modular architecture.
 
-- Which pages are most likely to gain or lose organic visibility?
-- What do 7-day, 30-day, 3-month, 6-month and 1-year trajectories look like?
-- Which opportunities deserve attention first?
-- How reliable is a forecast at each horizon?
-- Can technical, content, GEO and performance signals be evaluated together?
-- Can model output be translated into understandable executive recommendations?
+Unlike traditional SEO dashboards that primarily explain historical performance, this platform adds forward-looking decision support through multi-horizon ML forecasting, strategic model guardrails, scenario analysis and AI-assisted executive interpretation.
 
 ---
 
-## System Architecture
+# Project Highlights
 
-```mermaid
-flowchart TD
-    A[Google Search Console] --> C[Data Integration]
-    B[GA4] --> C
-    T[Technical / On-page / PageSpeed Signals] --> C
+- Google Search Console integration
+- Google Analytics 4 integration
+- Technical SEO and on-page intelligence
+- Advanced feature engineering
+- Multi-model ML benchmarking
+- Random Forest, XGBoost and LightGBM support
+- Genuine recursive daily ML forecasting
+- **7 / 14 / 30 / 90 / 180 / 365-day ML horizons**
+- Operational and strategic forecast separation
+- Leakage-safe chronological backtesting
+- Pure-ML 90-day CTR ensemble
+- Strategic ML guardrails and fallback routing
+- Scenario simulation
+- Page and keyword opportunity intelligence
+- Product / category opportunity intelligence
+- Content-to-commerce intelligence
+- GEO / AI visibility intelligence
+- Recommendation engine
+- SHAP explainability support
+- Multi-LLM architecture
+- Anthropic Claude, OpenAI GPT and Google Gemini support
+- RAG ingestion, chunking, embeddings and retrieval
+- Deterministic fallback logic
+- Turkish / English Streamlit dashboard
+- PostgreSQL support
+- pgvector-ready knowledge layer
+- Docker support
+- Sanitized public demo data
+- **123 final automated QA tests passing**
 
-    C --> D[Feature Engineering]
-    D --> E[ML Forecasting]
+---
 
-    E --> E1[Recursive Daily ML]
-    E --> E2[Strategic Direct ML Candidates]
-    E --> E3[Pure-ML CTR Ensemble]
+# Business Problem
 
-    E1 --> F[7 / 14 / 30 / 90 / 180 / 365]
-    E2 --> F
-    E3 --> F
+SEO teams often work with fragmented reporting from Search Console, GA4, crawlers, spreadsheets and third-party tools. This creates several operational challenges:
 
-    F --> G[Scenario Simulation]
-    F --> H[Opportunity Intelligence]
+- Decisions are reactive instead of predictive.
+- High-opportunity pages are difficult to prioritize consistently.
+- Short-term and long-term traffic expectations are mixed together.
+- Technical, content and performance signals are analyzed separately.
+- Long-horizon forecasts can be presented with more confidence than the data supports.
+- Manual reporting consumes time that could be used for execution.
+- Executive stakeholders often receive metrics without decision context.
 
-    G --> I[Recommendation Engine]
-    H --> I
+---
 
-    I --> J[Technical SEO Intelligence]
-    I --> K[Content + GEO Intelligence]
-    I --> L[Competitor Intelligence]
+# Business Value
 
-    J --> M[LLM / RAG Decision Support]
-    K --> M
-    L --> M
+The platform transforms SEO analysis into a predictive, automated decision-support process.
 
-    M --> N[Streamlit Decision Dashboard]
-    N --> O[Turkish / English]
+Key outcomes include:
+
+- Forward-looking organic traffic planning
+- Opportunity prioritization
+- Page-level decision support
+- Technical SEO prioritization
+- Content gap identification
+- GEO / AI visibility analysis
+- Strategic forecasting
+- Scenario comparison
+- Recommendation generation
+- Executive-level AI commentary
+- Reproducible QA and validation
+- Privacy-aware public demonstration
+
+---
+
+# End-to-End Architecture
+
+```text
+                Google Search Console
+                         │
+                         ▼
+                    GSC Extractor
+                         │
+                Google Analytics 4
+                         │
+                         ▼
+                    GA4 Extractor
+                         │
+                         ▼
+                Data Integration Layer
+                         │
+                         ▼
+                  Feature Engineering
+                         │
+        ┌────────────────┼────────────────┐
+        ▼                ▼                ▼
+   Lag / Trend       SEO Features     Calendar Features
+        └────────────────┼────────────────┘
+                         ▼
+                ML Training Dataset
+                         │
+                         ▼
+              Multi-Model Benchmarking
+        ┌──────────────┬──────────────┬──────────────┐
+        ▼              ▼              ▼
+ Random Forest      XGBoost        LightGBM
+        └──────────────┼──────────────┘
+                       ▼
+              Best Model Selection
+                       │
+                       ▼
+               Recursive Daily ML
+                       │
+        ┌──────────────┼───────────────────────────┐
+        ▼              ▼                           ▼
+   7 / 14 / 30      90 / 180                  365 Days
+   Operational      Strategic                  Strategic
+        │              │                           │
+        │        Guarded ML Routing                │
+        │       ┌──────┴──────────┐                │
+        │       ▼                 ▼                │
+        │   Direct ML        Pure-ML CTR           │
+        │   Candidate         Ensemble             │
+        └───────┴──────────┬──────┴────────────────┘
+                           ▼
+                  Scenario Simulation
+                           │
+                           ▼
+                 Opportunity Intelligence
+                           │
+             ┌─────────────┼─────────────┐
+             ▼             ▼             ▼
+       Technical SEO   Content + GEO   Competitor
+             └─────────────┼─────────────┘
+                           ▼
+                 Recommendation Engine
+                           │
+                           ▼
+                     LLM / RAG Layer
+              ┌────────────┼────────────┐
+              ▼            ▼            ▼
+          Anthropic      OpenAI      Gemini
+              └────────────┼────────────┘
+                           ▼
+                 Streamlit Dashboard
+                    Turkish / English
 ```
 
 ---
 
-## ML Forecasting Design
+# Technology Stack
 
-The production forecasting architecture intentionally does **not** treat all horizons as identical.
-
-### Operational horizons
-
-**7 / 14 / 30 days**
-
-These horizons use a recursive daily ML path. A genuine next-calendar-day model generates the next day, then the new state is recursively fed into later steps.
-
-### Strategic horizons
-
-**90 / 180 / 365 days**
-
-Strategic horizons use guarded ML routing.
-
-- Direct strategic models may be evaluated.
-- Unsafe tail-scaling is rejected by production guardrails.
-- When a direct strategic target is not safe, the route falls back to the recursive ML path.
-- 90-day impressions can use a **pure-ML CTR ensemble**.
-- 365 days remain ML-based but are explicitly marked as historically unvalidated because available Search Console history is insufficient for a leakage-safe 365-day train + 365-day holdout.
-
-This avoids presenting long-horizon forecasts with more certainty than the data supports.
+| Layer | Technology |
+|---|---|
+| Programming Language | Python 3.13 |
+| Data Processing | Pandas, NumPy |
+| Machine Learning | Scikit-learn, XGBoost, LightGBM |
+| Explainable AI | SHAP |
+| Search Data | Google Search Console API |
+| Analytics | Google Analytics Data API |
+| AI | Anthropic Claude, OpenAI GPT, Google Gemini |
+| RAG | Embeddings, retrieval, pgvector-ready storage |
+| Database | PostgreSQL |
+| Containerization | Docker |
+| Dashboard | Streamlit |
+| Visualization | Plotly |
+| Testing | Pytest |
+| Version Control | Git + GitHub |
 
 ---
 
-## Backtesting
+# Machine Learning Pipeline
 
-Backtesting is chronological and designed to avoid target leakage.
+The forecasting system uses genuine calendar-day ML forecasting rather than multiplying a one-step prediction by the requested number of days.
 
-### Historical Search Console research dataset
+The pipeline benchmarks Random Forest, XGBoost and LightGBM and evaluates models using metrics such as MAE, RMSE and R².
+
+---
+
+# Multi-Horizon ML Forecasting
+
+Production forecast horizons:
+
+- **7 days**
+- **14 days**
+- **30 days**
+- **90 days / 3 months**
+- **180 days / 6 months**
+- **365 days / 1 year**
+
+## Operational Forecasting
+
+7 / 14 / 30-day horizons use a recursive daily ML path. Each predicted day updates the state used by the next forecast step.
+
+## Strategic Forecasting
+
+90 / 180 / 365-day horizons use guarded ML routing. Direct strategic models are not automatically promoted; they must pass production safety checks. If a direct target requires unsafe tail scaling, the route falls back to the stable recursive ML path.
+
+---
+
+# Leakage-Safe Backtesting
+
+Historical Search Console research coverage:
 
 - **499 calendar days**
-- **2025-04-05 â†’ 2026-08-16**
-- **742,200 page-day rows**
+- **2025-04-05 → 2026-08-16**
+- **742,200 rows**
 - **8,437 pages**
 
-The available Search Console history was sufficient for operational and strategic 90/180-day research, but not for an unbiased 365-day train + 365-day holdout.
+Backtesting is chronological. Future observations are not used to fit, select or calibrate models that are later evaluated on earlier forecast origins.
 
-### Operational forecast performance
+## Operational Backtest Results
 
 | Horizon | Click Total Error | Click WAPE | Impression Total Error | Impression WAPE |
 |---:|---:|---:|---:|---:|
@@ -136,96 +244,192 @@ The available Search Console history was sufficient for operational and strategi
 | 14 days | 1.89% | 5.59% | 2.14% | 3.87% |
 | 30 days | 4.77% | 9.94% | 2.50% | 7.01% |
 
-### Strategic baseline
+## Strategic Backtest Results
 
-| Horizon | Click Total Error | Click WAPE | Impression Total Error | Impression WAPE |
-|---:|---:|---:|---:|---:|
-| 90 days | 13.77% | 25.44% | 68.68% | 68.90% |
-| 180 days | 25.28% | 29.64% | 9.59% | 24.82% |
+### 90 Days
 
-The original 90-day impression path was not accepted as strong enough. A separate pure-ML CTR architecture was then developed.
+- Click total error: **13.77%**
+- Click WAPE: **25.44%**
+- Original impression total error: **68.68%**
+- Original impression WAPE: **68.90%**
 
-### Pure-ML 90-day impression architecture
+The original 90-day impression route was not strong enough for production promotion.
 
-Models evaluated:
+### 180 Days
 
-- Ridge
-- Gradient Boosting
-- Random Forest
-- Histogram Gradient Boosting
-
-Pre-cutoff out-of-fold selection and bias correction were used before the final holdout.
-
-Final 90-day impression result:
-
-- **Total error: 28.58%**
-- **WAPE: 34.14%**
-- Production promotion gate: **passed**
-
-More detail is available in [`docs/engineering/ML_BACKTESTING.md`](docs/engineering/ML_BACKTESTING.md).
+- Click total error: **25.28%**
+- Click WAPE: **29.64%**
+- Impression total error: **9.59%**
+- Impression WAPE: **24.82%**
 
 ---
 
-## Production Guardrails
+# Pure-ML 90-Day CTR Ensemble
 
-A strategic forecast is not promoted only because a research model produces a numerically attractive target.
+Models:
 
-The production router checks whether the requested adjustment can be applied without destabilizing the already validated short-term path.
+- CTR Ridge
+- CTR Gradient Boosting
+- CTR Random Forest
+- CTR Histogram Gradient Boosting
 
-In the final accepted production design:
+Pre-cutoff out-of-fold selection and bias correction were used before the final holdout evaluation.
 
-- 90-day click direct ML target hit the guardrail â†’ `RecursiveDailyML`
-- 90-day impressions â†’ `MLOnlyCTREnsembleImpressions`
-- 180-day click direct ML target hit the guardrail â†’ `RecursiveDailyML`
-- 180-day impressions â†’ `RecursiveDailyML`
-- 365-day route â†’ ML hybrid with explicit validation limitation
+Final result:
 
-All six primary forecast horizons remain **ML-based**.
-
----
-
-## Final Automated QA
-
-Final release validation:
-
-- Python compile: **PASS**
-- Pipeline data validation: **PASS**
-- Final automated tests: **123 passed**
-- ML daily horizon coverage: **1 â†’ 365**
-- Portfolio horizons: **7 / 14 / 30 / 90 / 180 / 365**
-- Negative ML forecasts: **none**
-- Daily page + forecast-date key: **unique**
-- CTR consistency validation: **PASS**
-- Engagement-rate validation: **PASS**
-- Multi-horizon dashboard contract: **PASS**
-
-Final pipeline snapshot:
-
-- Integrated rows: **36,735**
-- Scenario rows: **14,187**
-- Recommendation rows: **1,578**
-- ML daily forecast rows: **688,025**
-- Next-day target validation RÂ² range: **0.9693 â†’ 0.9870**
-
-> The RÂ² values above refer to next-day target validation and are not presented as 90/180/365-day forecast accuracy.
-
-See [`docs/engineering/FINAL_QA.md`](docs/engineering/FINAL_QA.md).
+- **90-day impression total error: 28.58%**
+- **90-day impression WAPE: 34.14%**
+- Production promotion gate: **PASS**
 
 ---
 
-## Automated Multi-Horizon Smoke Test
+# Strategic ML Guardrails
 
-A dedicated automated check verifies that:
+Accepted production behavior:
 
-- exactly six horizon rows exist
-- daily ML output covers day 1 through day 365
-- each portfolio horizon reconciles with the cumulative daily forecast
-- 30 â†’ 90 â†’ 180 â†’ 365 values actually change
-- cumulative clicks and impressions grow with horizon length
-- all primary routes are marked as ML
-- 365 remains explicitly `Unvalidated-HistoryTooShort`
-- the dashboard exposes 7/14/30/90/180/365 options
-- AI Insights reads multi-horizon ML outputs
+- 90-day click direct ML target hit the guardrail → `RecursiveDailyML`
+- 90-day impressions → `MLOnlyCTREnsembleImpressions`
+- 180-day click direct ML target hit the guardrail → `RecursiveDailyML`
+- 180-day impressions → `RecursiveDailyML`
+- 365-day route → ML hybrid with explicit validation limitation
+
+All six primary forecast horizons remain ML-based.
+
+The one-year forecast is ML-based but is not presented as historically validated because current history is insufficient for a 365-day training period plus a 365-day holdout.
+
+---
+
+# Explainable AI (SHAP)
+
+The project includes SHAP support for model explainability. Explainability can identify important prediction drivers, support recommendation evidence and improve executive interpretation.
+
+---
+
+# Opportunity Intelligence
+
+The system creates decision-support outputs for:
+
+- page opportunities
+- keyword opportunities
+- content gaps
+- product / category opportunities
+- technical SEO issues
+- GEO / AI visibility
+- blog content-to-commerce opportunities
+
+---
+
+# Recommendation Engine
+
+Recommendations combine ML forecast signals, scenario analysis, opportunity scoring, deterministic business rules, technical/content evidence and optional LLM commentary.
+
+The LLM layer is not required for the deterministic decision engine to operate.
+
+---
+
+# Multi-LLM Architecture
+
+Supported providers:
+
+- Anthropic Claude
+- OpenAI GPT
+- Google Gemini
+
+A centralized provider manager separates business logic from provider-specific integrations. If live LLM generation is disabled or unavailable, deterministic fallback logic remains available.
+
+---
+
+# RAG Architecture
+
+The project contains document ingestion, chunking, embeddings, vector retrieval, an agent layer and PostgreSQL / pgvector-ready knowledge storage.
+
+---
+
+# Interactive Streamlit Dashboard
+
+Dashboard modules include:
+
+- Ana Panel / Home
+- Executive Overview
+- Page Analysis
+- SEO Opportunity Optimizer
+- AI Insights
+- Ask AI
+- Technical SEO
+- Content + GEO Intelligence
+- Competitor Intelligence
+
+Dashboard capabilities include Turkish / English UI, date and comparison filters, 7 / 14 / 30 / 90 / 180 / 365 ML horizon selection, operational vs strategic forecast views, KPI cards, forecast charts and recommendation tables.
+
+---
+
+# Historical SEO Performance Dashboard
+
+A separate portfolio dashboard presents historical organic-growth and e-commerce performance analysis.
+
+**Dashboard:** https://ozlemtonbul.com/dashboards/seo_dashboard.html
+
+The historical dashboard provides performance evidence, while this repository focuses on the AI/ML engineering architecture, forecasting, testing and decision-intelligence platform.
+
+---
+
+# Public Demo
+
+The repository includes sanitized demo data for public deployment.
+
+Current demo dataset:
+
+- **114 sanitized CSV files**
+- **17,790 rows**
+- **15 anonymized page identities**
+- Secret/privacy scan: **PASS**
+
+The public demo does not require production GSC or GA4 credentials and does not expose private client URLs or exact production business values.
+
+**Streamlit URL will be added after deployment.**
+
+---
+
+# Automated Testing
+
+Final automated QA:
+
+- ✅ Python compile PASS
+- ✅ Pipeline data validation PASS
+- ✅ **123 final QA tests passing**
+- ✅ Business-rule tests
+- ✅ ML backtesting tests
+- ✅ Multi-horizon forecasting tests
+- ✅ Strategic ML router tests
+- ✅ Pure-ML CTR ensemble tests
+- ✅ Localization tests
+- ✅ Streamlit UI execution tests
+- ✅ Dashboard source-contract tests
+- ✅ Historical extraction contract tests
+
+Run final QA:
+
+```bash
+python scripts/run_final_qa.py
+```
+
+Run multi-horizon smoke test:
+
+```bash
+python scripts/validate_ml_horizon_behavior.py
+```
+
+Run pytest:
+
+```bash
+python -m pytest -q
+```
+
+---
+
+# Multi-Horizon Automatic Smoke Check
+
+The dedicated smoke test verifies exactly six forecast horizons, daily forecast coverage from day 1 through day 365, daily-to-portfolio reconciliation, horizon changes, non-negative forecasts, ML-only primary routing and dashboard data contracts.
 
 Final result:
 
@@ -235,155 +439,33 @@ Final result:
 
 ---
 
-## Decision Intelligence Modules
+# Output Files
 
-### Executive Overview
-Business-level KPI summaries, trends and performance signals.
-
-### Page Analysis
-Page-level performance diagnostics and decision support.
-
-### SEO Opportunity Optimizer
-Opportunity prioritization using performance, forecasting and business logic.
-
-### AI Insights
-Multi-horizon ML forecast center with operational and strategic forecast views.
-
-### Ask AI
-LLM / RAG-powered analytical interface with deterministic fallback logic.
-
-### Technical SEO
-Crawl, technical signals and prioritization.
-
-### Content + GEO Intelligence
-Content-to-commerce, keyword/content gaps and generative-engine visibility signals.
-
-### Competitor Intelligence
-Competitive performance context and opportunity analysis.
+| Output | Description |
+|---|---|
+| seo_integrated_data.csv | Integrated SEO + analytics dataset |
+| seo_daily_performance.csv | Daily SEO performance |
+| seo_weekly_performance.csv | Weekly performance summary |
+| seo_monthly_performance.csv | Monthly performance summary |
+| seo_ml_forecast_daily.csv | Daily ML forecast path |
+| seo_ml_forecast_horizons.csv | Page-level horizon forecasts |
+| seo_ml_forecast_portfolio.csv | Portfolio forecast by horizon |
+| seo_ml_forecast_metrics.csv | Model metrics |
+| seo_ml_forecast_feature_importance.csv | Feature importance |
+| seo_ml_backtest_summary.csv | Backtest summary |
+| seo_scenario_simulation.csv | Scenario simulation |
+| seo_page_opportunity_intelligence.csv | Page opportunities |
+| seo_keyword_opportunity_intelligence.csv | Keyword opportunities |
+| seo_product_category_opportunities.csv | Product/category opportunities |
+| seo_technical_seo_intelligence.csv | Technical SEO intelligence |
+| seo_geo_ai_visibility_intelligence.csv | GEO / AI visibility intelligence |
+| seo_recommendations.csv | Recommendation output |
+| seo_shap_summary.csv | SHAP summary |
+| seo_rag_ingestion_summary.csv | RAG ingestion summary |
 
 ---
 
-## LLM + RAG Layer
-
-The project includes a provider-independent architecture for:
-
-- Anthropic
-- OpenAI
-- Google Gemini
-
-It also includes:
-
-- usage guard logic
-- deterministic fallback
-- RAG ingestion
-- chunking
-- embeddings
-- retrieval
-- PostgreSQL / pgvector-ready knowledge storage
-
-The public demo does not require production API credentials.
-
----
-
-## Public Demo Data
-
-The repository includes a separate sanitized demo layer.
-
-Demo release snapshot:
-
-- **114 sanitized CSV files**
-- **17,790 demo rows**
-- **15 anonymized page identities**
-- real client URLs replaced with `demo.example.com`
-- search queries anonymized
-- products/categories/organization identifiers anonymized
-- numerical business values transformed
-
-The demo is intended to demonstrate application behavior and architecture. Demo numbers are **not exact production business results**.
-
-Security details: [`docs/engineering/PUBLIC_DEMO_SECURITY.md`](docs/engineering/PUBLIC_DEMO_SECURITY.md).
-
----
-
-## Project Structure
-
-```text
-.
-â”œâ”€â”€ config/
-â”œâ”€â”€ dashboard/
-â”‚   â”œâ”€â”€ components/
-â”‚   â”œâ”€â”€ pages/
-â”‚   â””â”€â”€ services/
-â”œâ”€â”€ docker/
-â”œâ”€â”€ outputs/                  # sanitized public demo outputs
-â”œâ”€â”€ scripts/
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ extract/
-â”‚   â”œâ”€â”€ features/
-â”‚   â”œâ”€â”€ llm/
-â”‚   â”œâ”€â”€ memory/
-â”‚   â”œâ”€â”€ models/
-â”‚   â”œâ”€â”€ rag/
-â”‚   â”œâ”€â”€ recommendations/
-â”‚   â”œâ”€â”€ reporting/
-â”‚   â”œâ”€â”€ utils/
-â”‚   â””â”€â”€ warehouse/
-â”œâ”€â”€ tests/
-â”‚   â””â”€â”€ final_qa/
-â”œâ”€â”€ Dockerfile
-â”œâ”€â”€ docker-compose.yml
-â”œâ”€â”€ main.py
-â””â”€â”€ requirements.txt
-```
-
----
-
-## Run Locally
-
-### 1. Clone
-
-```bash
-git clone https://github.com/ozlemtonbul/seo-organic-growth-ml-llm-intelligence-ai-agent.git
-cd seo-organic-growth-ml-llm-intelligence-ai-agent
-```
-
-### 2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Run dashboard
-
-```bash
-python -m streamlit run dashboard/app.py
-```
-
----
-
-## Run Tests
-
-Final QA:
-
-```bash
-python scripts/run_final_qa.py
-```
-
-Multi-horizon automatic smoke check:
-
-```bash
-python scripts/validate_ml_horizon_behavior.py
-```
-
-Full pytest suite:
-
-```bash
-python -m pytest -q
-```
-
----
-
-## Docker
+# Docker
 
 ```bash
 docker compose up --build
@@ -397,89 +479,110 @@ docker compose down
 
 ---
 
-## Security & Privacy
+# Installation
 
-The public repository intentionally excludes production secrets and confidential source data.
-
-Excluded or sanitized items include:
-
-- `.env`
-- API keys and tokens
-- service-account JSON
-- production database dumps
-- private raw datasets
-- private historical extracts
-- local logs
-- local backups
-- virtual environments
-- caches
-- local patch archives
-
-The included `outputs/` directory contains **sanitized demo data**, not the production dataset.
+```bash
+git clone https://github.com/ozlemtonbul/seo-organic-growth-ml-llm-intelligence-ai-agent.git
+cd seo-organic-growth-ml-llm-intelligence-ai-agent
+pip install -r requirements.txt
+python -m streamlit run dashboard/app.py
+```
 
 ---
 
-## Engineering Principles Demonstrated
+# Security & Privacy
 
-This project emphasizes:
+The public repository intentionally excludes production secrets and private source data, including `.env`, API keys, tokens, service-account JSON, credentials, production database dumps, private raw data, private historical extracts, local logs, backups, virtual environments, caches and patch archives.
 
-- production-oriented ML rather than notebook-only modeling
-- chronological validation
-- leakage prevention
-- explicit model limitations
-- guarded production routing
-- reproducible automated QA
-- multilingual product design
-- explainable business-oriented outputs
-- privacy-aware public demo engineering
-- separation of deterministic logic and LLM commentary
+The included `outputs/` folder contains sanitized demo data rather than exact private production data.
 
 ---
 
-## Current Status
+# Engineering Decision History
+
+Not every experimental model was promoted.
+
+Examples:
+
+- damped strategic ensemble → rejected
+- statistical champion approach → research benchmark only
+- 90-day lifecycle calibrator → improved baseline but failed absolute quality target
+- statistical + ML CTR ensemble → replaced by pure-ML architecture
+- unsafe direct strategic click targets → blocked by guardrails
+- 365-day validation claim → intentionally withheld due insufficient historical coverage
+
+Detailed evidence is available under `docs/engineering/`.
+
+---
+
+# Current Status
 
 | Capability | Status |
 |---|---|
-| GSC integration | âœ… Implemented |
-| GA4 integration | âœ… Implemented |
-| Feature engineering | âœ… Implemented |
-| ML forecasting | âœ… Implemented |
-| 7/14/30-day operational forecasting | âœ… Backtested |
-| 90/180-day strategic forecasting | âœ… Backtested |
-| 365-day ML forecasting | âš ï¸ Implemented; historical validation pending |
-| Pure-ML CTR ensemble | âœ… Implemented |
-| Strategic ML guardrails | âœ… Implemented |
-| Scenario simulation | âœ… Implemented |
-| Recommendation engine | âœ… Implemented |
-| Technical SEO intelligence | âœ… Implemented |
-| Content + GEO intelligence | âœ… Implemented |
-| RAG architecture | âœ… Implemented |
-| Multi-LLM architecture | âœ… Implemented |
-| Streamlit dashboard | âœ… Implemented |
-| Turkish / English UI | âœ… Implemented |
-| PostgreSQL support | âœ… Implemented |
-| Docker support | âœ… Implemented |
-| Sanitized public demo | âœ… Implemented |
-| Final automated QA | âœ… 123 passed |
+| Google Search Console integration | ✅ Implemented |
+| GA4 integration | ✅ Implemented |
+| Technical SEO extraction | ✅ Implemented |
+| Feature engineering | ✅ Implemented |
+| Random Forest | ✅ Implemented |
+| XGBoost | ✅ Implemented |
+| LightGBM | ✅ Implemented |
+| Multi-model benchmarking | ✅ Implemented |
+| Multi-horizon ML forecasting | ✅ Implemented |
+| 7 / 14 / 30-day forecasting | ✅ Backtested |
+| 90 / 180-day strategic forecasting | ✅ Backtested |
+| 365-day ML forecast | ⚠️ Implemented; historical validation pending |
+| Pure-ML CTR ensemble | ✅ Implemented |
+| Strategic ML guardrails | ✅ Implemented |
+| Scenario simulation | ✅ Implemented |
+| SHAP explainability | ✅ Implemented |
+| Recommendation engine | ✅ Implemented |
+| Technical SEO intelligence | ✅ Implemented |
+| Content + GEO intelligence | ✅ Implemented |
+| Competitor intelligence | ✅ Implemented |
+| Multi-LLM architecture | ✅ Implemented |
+| RAG architecture | ✅ Implemented |
+| Streamlit dashboard | ✅ Implemented |
+| Turkish / English UI | ✅ Implemented |
+| PostgreSQL support | ✅ Implemented |
+| Docker support | ✅ Implemented |
+| Sanitized public demo data | ✅ Implemented |
+| Final QA | ✅ 123 passed |
 
 ---
 
-## Author
+# Future Enhancements
 
-### Ã–zlem Tonbul
-
-**AI & Data Intelligence Â· AI Agents Â· LLMs Â· Machine Learning Â· Growth Analytics Â· SEO Intelligence**
-
-Portfolio: `ozlemtonbul.com`  
-GitHub: `github.com/ozlemtonbul`  
-LinkedIn: `linkedin.com/in/ozlemtonbul`
+- Scheduled orchestration
+- Online model retraining
+- Model registry
+- Drift monitoring
+- REST API deployment
+- Cloud-native monitoring
+- Kubernetes deployment
+- Enterprise authentication
+- Role-based access
+- Additional long-horizon validation as historical coverage grows
 
 ---
 
-## License
+# Author
+
+## Özlem Tonbul
+
+**AI & Data Intelligence • AI Agents • LLMs • Machine Learning • Growth Analytics • SEO Intelligence**
+
+🌐 Website: https://ozlemtonbul.com
+
+💻 GitHub: https://github.com/ozlemtonbul
+
+💼 LinkedIn: https://www.linkedin.com/in/ozlemtonbul/
+
+---
+
+# License
 
 This repository is provided as a professional engineering and portfolio project.
 
-Production credentials, private datasets and confidential business information are intentionally excluded.
+Production credentials, private datasets, API keys and confidential business information are intentionally excluded from version control.
 
-
+© 2026 Özlem Tonbul. All rights reserved.
