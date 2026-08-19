@@ -1,0 +1,3 @@
+Model,Algorithm,MAE,RMSE,R2,TrainRows,TestRows,ValidationMethod,Selected,ForecastFamily,BaseStepDays,SupportedHorizons
+Next_Clicks,LightGBM,0.1595461996593782,1.4087097055113156,1.0406191636224584,37191.0,7722.0,time_aware_holdout,0.96,RecursiveDailyML,1,"7,14,30"
+Next_Impressions,LightGBM,2.62982984071073,13.414507133196015,1.08406577135255,37191.0,7722.0,time_aware_holdout,0.96,RecursiveDailyML,1,"7,14,30"

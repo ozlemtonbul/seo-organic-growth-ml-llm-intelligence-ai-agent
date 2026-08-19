@@ -1,0 +1,10 @@
+SEO & GEO Decision Intelligence - Demo Security Audit
+========================================================================
+Demo directory: C:\Users\VİCCO\Desktop\Projects\seo-organic-growth-intelligence-demo
+CSV files generated: 114
+Rows generated: 17790
+Anonymized pages: 15
+Removed unsafe files/directories: 0
+Secret scan: PASS
+
+No high-confidence credential, service-account identity, or real client domain was detected.

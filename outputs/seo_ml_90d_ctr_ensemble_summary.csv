@@ -1,0 +1,3 @@
+HorizonDays,Metric,Method,SelectedEnsemble,Predicted90DClicks,PredictedCTR,BiasCorrection,ImpliedImpressionTotal,ScaleFactor,TotalErrorPct,WAPE,BiasPct
+90,impressions,RecursiveDailyML,nan,,,0.97,,1.16,68.68,83.369,68.68
+90,impressions,CTREnsembleImpressionsML,Top3MedianCTR,108458.32439999998,0.02535,0.91119666,3486483.6192,0.8540372399999999,24.19,38.187599999999996,24.19

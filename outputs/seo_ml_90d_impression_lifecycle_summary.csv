@@ -1,0 +1,3 @@
+HorizonDays,Metric,Method,SelectedCandidate,DirectPredictedTotal,ScaleFactor,TotalErrorPct,WAPE,BiasPct
+90,impressions,RecursiveDailyML,nan,,1.21,68.68,55.12,68.68
+90,impressions,LifecycleCalibratedML,LifecycleRidge,6925543.004800001,1.13758755,58.58,47.216,58.58

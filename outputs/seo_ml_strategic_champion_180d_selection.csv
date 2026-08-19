@@ -1,0 +1,7 @@
+HorizonDays,Metric,Candidate,InnerValidationDays,WAPE,BiasPct,Selected
+180,clicks,PortfolioHGBR,60,18.713856,7.9294,1.1099999999999999
+180,clicks,WeeklyRepeat4W,60,48.215075999999996,46.0137,0.0
+180,clicks,WeekdayMedian8W,60,48.349476,44.8565,0.0
+180,impressions,PortfolioHGBR,60,15.176112,-1.7699,1.1099999999999999
+180,impressions,WeekdayMedian8W,60,42.648816,45.126,0.0
+180,impressions,WeeklyRepeat4W,60,45.194268,47.9409,0.0

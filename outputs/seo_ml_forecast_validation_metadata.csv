@@ -1,0 +1,7 @@
+HorizonDays,ClickMethod,ImpressionMethod,ClickTotalErrorPct,ClickWAPE,ImpressionTotalErrorPct,ImpressionWAPE,ValidationStatus,Notes
+7,RecursiveDailyML,RecursiveDailyML,1.21,4.9039,0.87,3.0652,Backtested-Operational,Leakage-safe historical holdout.
+14,RecursiveDailyML,RecursiveDailyML,1.89,4.9751,2.14,3.0573,Backtested-Operational,Leakage-safe historical holdout.
+30,RecursiveDailyML,RecursiveDailyML,4.77,8.8466,2.5,5.5379000000000005,Backtested-Operational,Leakage-safe historical holdout.
+90,RecursiveDailyML,MLOnlyCTREnsembleImpressions,13.77,22.6416,28.58,26.9706,Backtested-StrategicML,90d clicks use RecursiveDailyML production fallback because the current live direct target violates the tail guardrail. 90d impressions use the pure-ML CTR ensemble.
+180,RecursiveDailyML,RecursiveDailyML,25.28,26.3796,9.59,19.6078,Backtested-StrategicML,RecursiveDailyML is the guarded ML production route for the current 180d live forecast.
+365,MLHybridFirst180+RecursiveTail-Unvalidated365,MLHybridFirst180+RecursiveTail-Unvalidated365,,,,,Unvalidated-HistoryTooShort,365d forecast is ML-based but not leakage-safe backtested. Current historical coverage is 499 days; 730 days are required for a 365-day train + 365-day holdout design.

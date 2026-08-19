@@ -1,0 +1,13 @@
+HorizonDays,Metric,Candidate,InnerValidationDays,WAPE,BiasPct,Selected
+90,clicks,WeeklyRepeat4W,45,11.229322,-3.3695,0.83
+90,clicks,WeekdayMedian8W,45,23.802512000000004,-22.4552,0.0
+90,clicks,PortfolioHGBR,45,28.273168000000002,-26.6728,0.0
+90,impressions,PortfolioHGBR,45,10.088338,-7.4237,0.83
+90,impressions,WeekdayMedian8W,45,11.953619999999999,-9.5592,0.0
+90,impressions,WeeklyRepeat4W,45,13.381758000000001,6.6511,0.0
+180,clicks,PortfolioHGBR,60,23.615104000000002,7.9294,0.83
+180,clicks,WeeklyRepeat4W,60,60.842834,46.0137,0.0
+180,clicks,WeekdayMedian8W,60,61.012434000000006,44.8565,0.0
+180,impressions,PortfolioHGBR,60,19.150808,-1.7699,0.83
+180,impressions,WeekdayMedian8W,60,53.818744,45.126,0.0
+180,impressions,WeeklyRepeat4W,60,57.030862000000006,47.9409,0.0

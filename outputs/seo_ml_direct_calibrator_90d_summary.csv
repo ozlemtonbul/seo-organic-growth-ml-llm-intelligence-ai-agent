@@ -1,0 +1,5 @@
+HorizonDays,Metric,Method,SelectedCandidate,DirectPredictedTotal,ScaleFactor,TotalErrorPct,WAPE,BiasPct
+90,clicks,RecursiveDailyML,nan,,1.03,13.77,23.9136,13.77
+90,clicks,DirectHorizonCalibratedML,DirectHGBR,105844.87079999999,1.0117473700000001,11.75,23.302599999999998,11.75
+90,impressions,RecursiveDailyML,nan,,1.03,68.68,64.766,68.68
+90,impressions,DirectHorizonCalibratedML,DirectHGBR,7250341.751999998,1.40176202,129.56,121.7864,129.56

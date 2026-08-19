@@ -1,0 +1,5 @@
+HorizonDays,Metric,Method,SelectedCandidate,TrainingSamples,TargetTotal,AppliedScale,PredictedCTR,BiasCorrection
+90,clicks,DirectHorizonCalibratedML,DirectHGBR,254.88,157128.5666180895,1.4080000000000001,,
+90,impressions,CTREnsembleImpressionsML,AllMedianCTR,,2752650.5524032433,1.1449598925843434,0.0297401658882788,0.8477078
+180,clicks,DirectHorizonCalibratedML,DirectRandomForest,190.07999999999998,277572.74621262064,1.4080000000000001,,
+180,impressions,StrategicChampionPortfolio,WeeklyRepeat4W,,4529061.54,,,

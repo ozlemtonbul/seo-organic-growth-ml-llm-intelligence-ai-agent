@@ -1,0 +1,3 @@
+HorizonDays,Metric,BaselineTotalErrorPct,CandidateTotalErrorPct,BaselineWAPE,CandidateWAPE,PromoteCandidate
+90,clicks,13.77,11.75,20.097600000000003,22.0631,1.06
+90,impressions,68.68,129.56,54.431000000000004,115.3084,0.0

@@ -1,0 +1,7 @@
+HorizonDays,HorizonType,PredictedClicks,PredictedImpressions,ClickMethod,ImpressionMethod
+7,Operational,7465.517696000002,259681.17542884246,RecursiveDailyML,RecursiveDailyML
+14,Operational,14897.767544,525835.0963202335,RecursiveDailyML,RecursiveDailyML
+30,Operational,31925.106740800005,1143598.599402825,RecursiveDailyML,RecursiveDailyML
+90,Strategic,95364.2051072,3549470.4491515504,DirectHorizonCalibratedML,CTREnsembleImpressionsML
+180,Strategic,190197.23052,5840105.67,DirectHorizonCalibratedML,StrategicChampionPortfolio
+365,Strategic,310986.46068300004,11504132.300191998,RecursiveDailyML-Unvalidated365,RecursiveDailyML-Unvalidated365

@@ -1,0 +1,5 @@
+HorizonDays,Method,ClickTotalErrorPct,ClickWAPE,ClickBiasPct,ImpressionTotalErrorPct,ImpressionWAPE,ImpressionBiasPct
+90,RecursiveDailyML,13.77,20.352,13.77,68.68,71.656,68.68
+90,StrategicDampedEnsembleML,23.67,26.4,23.67,54.45,56.9296,54.45
+180,RecursiveDailyML,25.28,23.712,-25.28,9.59,25.812800000000003,9.59
+180,StrategicDampedEnsembleML,29.74,25.599999999999998,-29.74,11.73,22.0792,-11.73

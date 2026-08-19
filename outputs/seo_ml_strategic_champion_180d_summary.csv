@@ -1,0 +1,5 @@
+HorizonDays,Metric,Method,SelectedCandidate,TotalErrorPct,WAPE,BiasPct
+180,clicks,RecursiveDailyML,nan,25.28,28.750799999999998,-25.28
+180,clicks,StrategicChampionPortfolio,PortfolioHGBR,21.83,26.0639,-21.83
+180,impressions,RecursiveDailyML,nan,9.59,24.0754,9.59
+180,impressions,StrategicChampionPortfolio,PortfolioHGBR,0.69,22.0287,-0.69

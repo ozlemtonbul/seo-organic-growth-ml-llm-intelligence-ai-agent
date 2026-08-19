@@ -1,0 +1,2 @@
+HorizonDays,Metric,PureMLPrimary,BaselineTotalErrorPct,CandidateTotalErrorPct,BaselineWAPE,CandidateWAPE,AbsoluteErrorThresholdPct,PromoteCandidate
+90,impressions,0.96,68.68,28.58,81.302,27.311999999999998,30.0,1.0
