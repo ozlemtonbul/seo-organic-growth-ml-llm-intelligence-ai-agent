@@ -25,16 +25,14 @@ sys.path.insert(0, PROJECT_ROOT_STR)
 
 from dashboard.app_config import APP_TITLE
 from dashboard.i18n import t
+from dashboard.url_state import resolve_language_from_url
 
 
 # ============================================================
 # ACTIVE LANGUAGE
 # ============================================================
 
-language = st.session_state.get(
-    "dashboard_language",
-    "tr",
-)
+language = resolve_language_from_url()
 
 
 # ============================================================
@@ -103,48 +101,56 @@ home_page = st.Page(
 
 executive_page = st.Page(
     "pages/1_Executive_Overview.py",
+    url_path="executive-overview",
     title=current["executive"],
     icon="📊",
 )
 
 page_analysis_page = st.Page(
     "pages/2_Page_Analysis.py",
+    url_path="page-analysis",
     title=current["page_analysis"],
     icon="📄",
 )
 
 optimizer_page = st.Page(
     "pages/3_SEO_Opportunity_Optimizer.py",
+    url_path="seo-opportunity-optimizer",
     title=current["optimizer"],
     icon="🎯",
 )
 
 ai_insights_page = st.Page(
     "pages/4_AI_Insights.py",
+    url_path="ai-insights",
     title=current["ai_insights"],
     icon="🧠",
 )
 
 ask_ai_page = st.Page(
     "pages/5_Ask_AI.py",
+    url_path="ask-ai",
     title=current["ask_ai"],
     icon="💬",
 )
 
 technical_page = st.Page(
     "pages/6_Technical_SEO.py",
+    url_path="technical-seo",
     title=current["technical"],
     icon="🛠️",
 )
 
 content_geo_page = st.Page(
     "pages/7_Content_GEO_Intelligence.py",
+    url_path="content-geo-intelligence",
     title=current["content_geo"],
     icon="🧭",
 )
 
 competitor_page = st.Page(
     "pages/8_Competitor_Intelligence.py",
+    url_path="competitor-intelligence",
     title=current["competitor"],
     icon="🔭",
 )

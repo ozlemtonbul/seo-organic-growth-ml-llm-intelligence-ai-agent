@@ -18,6 +18,10 @@ from dashboard.filters import (
 )
 
 from dashboard.i18n import translate
+from dashboard.url_state import (
+    sync_language_to_url,
+    sync_language_widget_to_url,
+)
 
 
 def _forecast_horizon_option_label(
@@ -810,6 +814,11 @@ def render_interactive_filter_bar(
             ),
             key="dashboard_language",
             label_visibility="collapsed",
+            on_change=sync_language_widget_to_url,
+        )
+
+        language = sync_language_to_url(
+            language
         )
 
     with date_column:

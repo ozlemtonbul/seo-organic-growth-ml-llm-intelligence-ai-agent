@@ -410,3 +410,48 @@ def test_localized_dataframe_values_follow_active_language():
     assert en.loc[0, "keyword_intent"] == "Transactional"
     assert en.loc[0, "PriorityTier"] == "High Priority"
     assert en.loc[0, "ConfidenceLevel"] == "High"
+
+def test_router_uses_clean_shareable_url_paths():
+    source = (DASHBOARD_ROOT / "app.py").read_text(encoding="utf-8-sig")
+
+    expected_paths = [
+        'url_path="executive-overview"',
+        'url_path="page-analysis"',
+        'url_path="seo-opportunity-optimizer"',
+        'url_path="ai-insights"',
+        'url_path="ask-ai"',
+        'url_path="technical-seo"',
+        'url_path="content-geo-intelligence"',
+        'url_path="competitor-intelligence"',
+    ]
+
+    for expected in expected_paths:
+        assert expected in source, f"Clean Streamlit url_path missing: {expected}"
+
+    # Streamlit url_path values must stay flat (no forward slashes).
+    for expected in expected_paths:
+        value = expected.split('"', 2)[1]
+        assert "/" not in value
+
+
+def test_language_is_synchronized_between_url_and_session_state():
+    app_source = (DASHBOARD_ROOT / "app.py").read_text(encoding="utf-8-sig")
+    layout_source = (DASHBOARD_ROOT / "layout.py").read_text(encoding="utf-8-sig")
+    url_state_source = (DASHBOARD_ROOT / "url_state.py").read_text(encoding="utf-8-sig")
+
+    assert "resolve_language_from_url()" in app_source
+    assert "sync_language_to_url(" in layout_source
+    assert "sync_language_widget_to_url" in layout_source
+    assert "on_change=sync_language_widget_to_url" in layout_source
+
+    assert 'LANG_QUERY_KEY = "lang"' in url_state_source
+    assert "st.query_params" in url_state_source
+    assert 'st.session_state["dashboard_language"]' in url_state_source
+    assert "url_language or session_language" in url_state_source
+
+
+def test_language_url_module_compiles_without_bom():
+    source = (DASHBOARD_ROOT / "url_state.py").read_text(encoding="utf-8")
+    assert not source.startswith("\\ufeff")
+    compile(source, str(DASHBOARD_ROOT / "url_state.py"), "exec")
+
