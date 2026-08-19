@@ -523,11 +523,14 @@ def test_language_is_synchronized_between_url_session_and_localized_path():
     assert "sync_language_to_url(" in layout_source
     assert "sync_language_widget_to_url" in layout_source
     assert "on_change=sync_language_widget_to_url" in layout_source
+    assert "LANGUAGE_WIDGET_KEY" in layout_source
+    assert "key=LANGUAGE_WIDGET_KEY" in layout_source
 
     assert 'LANG_QUERY_KEY = "lang"' in url_state_source
     assert "st.query_params" in url_state_source
     assert 'st.session_state["dashboard_language"]' in url_state_source
     assert 'PENDING_LANGUAGE_KEY = "_dashboard_language_requested"' in url_state_source
+    assert 'LANGUAGE_WIDGET_KEY = "dashboard_language_widget"' in url_state_source
     assert "st.context.url" in url_state_source
     assert "pathname_language=_pathname_language()" in url_state_source
     assert "requested_language=requested_language" in url_state_source

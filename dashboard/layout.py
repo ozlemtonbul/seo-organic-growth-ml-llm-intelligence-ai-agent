@@ -18,7 +18,10 @@ from dashboard.filters import (
 )
 
 from dashboard.i18n import translate
+
+from dashboard.demo_runtime import run_demo_analysis
 from dashboard.url_state import (
+    LANGUAGE_WIDGET_KEY,
     sync_language_to_url,
     sync_language_widget_to_url,
 )
@@ -600,6 +603,12 @@ def render_interactive_filter_bar(
     if "dashboard_language" not in st.session_state:
         st.session_state["dashboard_language"] = "tr"
 
+    # Keep the visible page widget separate from the router's app-wide
+    # language state. The widget is page-scoped; dashboard_language is not.
+    active_language = st.session_state.get("dashboard_language", "tr")
+    if st.session_state.get(LANGUAGE_WIDGET_KEY) != active_language:
+        st.session_state[LANGUAGE_WIDGET_KEY] = active_language
+
     date_reference = (
         reference_date
         or (
@@ -731,6 +740,34 @@ def render_interactive_filter_bar(
                     "dashboard_applied_custom_comparison_range"
                 ] = tuple(selected)
 
+        # Public demo: process the bundled anonymized GSC + GA4 output
+        # instead of attempting to use private Google credentials.
+        applied_preset = st.session_state.get(
+            "dashboard_selected_preset",
+            default_preset,
+        )
+        demo_start, demo_end = resolve_date_range(
+            applied_preset,
+            today=date_reference,
+        )
+
+        if applied_preset == "custom_range":
+            applied_custom = st.session_state.get(
+                "dashboard_applied_custom_date_range"
+            )
+            if (
+                isinstance(applied_custom, (tuple, list))
+                and len(applied_custom) == 2
+            ):
+                demo_start, demo_end = applied_custom
+
+        st.session_state["dashboard_demo_analysis_result"] = (
+            run_demo_analysis(
+                min(demo_start, demo_end),
+                max(demo_start, demo_end),
+            )
+        )
+
         st.session_state[
             "dashboard_filters_just_applied"
         ] = True
@@ -785,6 +822,11 @@ def render_interactive_filter_bar(
             None,
         )
 
+        st.session_state.pop(
+            "dashboard_demo_analysis_result",
+            None,
+        )
+
         st.session_state[
             "dashboard_filters_just_reset"
         ] = True
@@ -812,7 +854,7 @@ def render_interactive_filter_bar(
                 if value == "tr"
                 else "Language: English"
             ),
-            key="dashboard_language",
+            key=LANGUAGE_WIDGET_KEY,
             label_visibility="collapsed",
             on_change=sync_language_widget_to_url,
         )
@@ -1069,19 +1111,52 @@ def render_interactive_filter_bar(
 
             st.caption(
                 (
-                    "ℹ️ Seçimler yalnızca **Analizi Uygula** düğmesine "
-                    "bastığınızda tarih-duyarlı performans bölümlerine uygulanır. "
-                    "Model, SHAP, teknik denetim ve öneri snapshot'ları son başarılı "
-                    "pipeline çalışmasını temsil eder. Dil ve uygulanmış filtreler "
-                    "sayfalar arasında korunur."
+                    "ℹ️ **Analizi Uygula** düğmesi, public demoda repoya eklenmiş "
+                    "anonimleştirilmiş GSC + GA4 demo çıktısını seçilen dönem için "
+                    "gerçekten işler. Gerçek müşteri API kimlik bilgileri veya "
+                    "canlı Google hesabı kullanılmaz."
                     if language == "tr"
                     else
-                    "ℹ️ Selections affect date-aware performance sections only "
-                    "after you press **Apply Analysis**. Model, SHAP, technical-audit "
-                    "and recommendation snapshots represent the latest successful "
-                    "pipeline run. Language and applied filters persist across pages."
+                    "ℹ️ **Apply Analysis** processes the bundled anonymized "
+                    "GSC + GA4 demo output for the selected period in the public demo. "
+                    "It does not use real client API credentials or a live Google account."
                 )
             )
+
+    demo_result = st.session_state.get(
+        "dashboard_demo_analysis_result"
+    )
+
+    if isinstance(demo_result, dict):
+        if demo_result.get("success"):
+            demo_message = (
+                (
+                    "✅ Demo analizi tamamlandı · "
+                    f"{demo_result.get('rows', 0):,} satır · "
+                    f"{demo_result.get('days', 0):,} gün · "
+                    f"{demo_result.get('pages', 0):,} anonim sayfa · "
+                    f"{demo_result.get('clicks', 0):,.0f} tıklama · "
+                    f"{demo_result.get('impressions', 0):,.0f} gösterim"
+                )
+                if language == "tr"
+                else
+                (
+                    "✅ Demo analysis completed · "
+                    f"{demo_result.get('rows', 0):,} rows · "
+                    f"{demo_result.get('days', 0):,} days · "
+                    f"{demo_result.get('pages', 0):,} anonymized pages · "
+                    f"{demo_result.get('clicks', 0):,.0f} clicks · "
+                    f"{demo_result.get('impressions', 0):,.0f} impressions"
+                )
+            )
+            st.success(demo_message)
+        else:
+            demo_warning = (
+                "Seçilen dönem için anonim demo verisi bulunamadı."
+                if language == "tr"
+                else "No anonymized demo data was found for the selected period."
+            )
+            st.warning(demo_warning)
 
     # ========================================================
     # APPLIED STATE

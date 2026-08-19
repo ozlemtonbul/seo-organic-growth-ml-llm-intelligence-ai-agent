@@ -11,6 +11,7 @@ VALID_LANGUAGES = {"tr", "en"}
 DEFAULT_LANGUAGE = "tr"
 LANG_QUERY_KEY = "lang"
 PENDING_LANGUAGE_KEY = "_dashboard_language_requested"
+LANGUAGE_WIDGET_KEY = "dashboard_language_widget"
 
 
 def normalize_language(value: object, default: str | None = None) -> str | None:
@@ -148,8 +149,9 @@ def sync_language_to_url(language: object) -> str:
     """
     Synchronize active language to the URL only.
 
-    Do not write dashboard_language here because the selectbox already owns
-    that Session State key during page execution.
+    This helper mirrors the resolved language to the shareable URL. The
+    visible selectbox uses a separate widget key, so router state is not tied
+    to a page-scoped widget lifecycle.
     """
     normalized = (
         normalize_language(language, DEFAULT_LANGUAGE)
@@ -161,21 +163,24 @@ def sync_language_to_url(language: object) -> str:
 
 def sync_language_widget_to_url() -> None:
     """
-    Callback for the TR/EN selectbox.
+    Callback for the page-level TR/EN selectbox.
 
-    Streamlit has already stored the newly selected value in
-    session_state["dashboard_language"]. We record that value as one-run
-    navigation intent *before* touching the URL. On the next entrypoint rerun,
-    this intent wins over the previous pathname/query and the router switches
-    to the matching localized slug.
+    The visible widget intentionally uses LANGUAGE_WIDGET_KEY instead of
+    ``dashboard_language``. This decouples page-scoped widget lifecycle from
+    the app-wide language state used by the router. Streamlit can remove a
+    page widget's state when the URL switches to the counterpart page; the
+    internal dashboard_language value remains stable across that switch.
+
+    The callback only records the fresh intent. The entrypoint rerun owns URL
+    normalization and localized-page redirection.
     """
     selected = (
         normalize_language(
-            st.session_state.get("dashboard_language"),
+            st.session_state.get(LANGUAGE_WIDGET_KEY),
             DEFAULT_LANGUAGE,
         )
         or DEFAULT_LANGUAGE
     )
 
+    st.session_state["dashboard_language"] = selected
     st.session_state[PENDING_LANGUAGE_KEY] = selected
-    _write_query_language(selected)

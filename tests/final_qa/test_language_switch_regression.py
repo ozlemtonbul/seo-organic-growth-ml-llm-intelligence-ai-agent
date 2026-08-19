@@ -33,11 +33,12 @@ def test_language_selector_records_new_navigation_intent():
 
     assert not _exceptions(at)
 
-    language_widget = at.selectbox(key="dashboard_language")
+    language_widget = at.selectbox(key="dashboard_language_widget")
     language_widget.select("en")
     at.run(timeout=45)
 
     assert not _exceptions(at)
+    assert at.session_state["dashboard_language_widget"] == "en"
     assert at.session_state["dashboard_language"] == "en"
     assert (
         at.session_state["_dashboard_language_requested"]
