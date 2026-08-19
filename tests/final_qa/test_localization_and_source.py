@@ -527,7 +527,10 @@ def test_language_is_synchronized_between_url_session_and_localized_path():
     assert 'LANG_QUERY_KEY = "lang"' in url_state_source
     assert "st.query_params" in url_state_source
     assert 'st.session_state["dashboard_language"]' in url_state_source
-    assert "url_language or session_language" in url_state_source
+    assert 'PENDING_LANGUAGE_KEY = "_dashboard_language_requested"' in url_state_source
+    assert "st.context.url" in url_state_source
+    assert "pathname_language=_pathname_language()" in url_state_source
+    assert "requested_language=requested_language" in url_state_source
 
     # The entrypoint performs pathname canonicalization after navigation
     # resolution, preserving the same logical page across a language switch.
@@ -545,3 +548,47 @@ def test_routes_module_compiles_without_bom():
     source = (DASHBOARD_ROOT / "routes.py").read_text(encoding="utf-8")
     assert not source.startswith("\\ufeff")
     compile(source, str(DASHBOARD_ROOT / "routes.py"), "exec")
+
+
+def test_localized_slug_infers_language_without_query_param():
+    from dashboard.routes import language_from_slug
+
+    assert language_from_slug("ana-panel") == "tr"
+    assert language_from_slug("teknik-seo") == "tr"
+    assert language_from_slug("home") == "en"
+    assert language_from_slug("technical-seo") == "en"
+    assert language_from_slug("unknown") is None
+
+
+def test_language_resolution_prioritizes_fresh_widget_intent():
+    from dashboard.url_state import choose_language
+
+    # Regression: the user selects EN while the current URL can still carry
+    # the old Turkish path/query. The fresh widget intent must win.
+    assert choose_language(
+        requested_language="en",
+        query_language="tr",
+        pathname_language="tr",
+        session_language="en",
+    ) == "en"
+
+    assert choose_language(
+        requested_language="tr",
+        query_language="en",
+        pathname_language="en",
+        session_language="tr",
+    ) == "tr"
+
+
+def test_language_resolution_uses_localized_path_when_query_is_missing():
+    from dashboard.url_state import choose_language
+
+    assert choose_language(
+        pathname_language="tr",
+        session_language=None,
+    ) == "tr"
+
+    assert choose_language(
+        pathname_language="en",
+        session_language=None,
+    ) == "en"

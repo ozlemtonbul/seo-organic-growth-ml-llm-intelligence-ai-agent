@@ -103,3 +103,14 @@ SLUG_TO_PAGE_KEY: Final[dict[str, str]] = {
 
 def page_key_from_slug(slug: str) -> str | None:
     return SLUG_TO_PAGE_KEY.get(str(slug).strip().strip("/"))
+
+SLUG_TO_LANGUAGE: Final[dict[str, str]] = {
+    page_slug(page_key, language): language
+    for page_key in PAGE_SPECS
+    for language in SUPPORTED_LANGUAGES
+}
+
+
+def language_from_slug(slug: str) -> str | None:
+    """Return the language encoded by a localized page slug."""
+    return SLUG_TO_LANGUAGE.get(str(slug).strip().strip("/"))
