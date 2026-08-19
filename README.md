@@ -1,8 +1,18 @@
-# SEO & GEO Decision Intelligence AI Agent
+﻿# SEO & GEO Decision Intelligence AI Agent
 
 A production-oriented **SEO, GEO, Machine Learning and LLM decision-intelligence platform** that combines Google Search Console, GA4, technical SEO signals, forecasting, scenario simulation, recommendation logic, RAG and a bilingual Streamlit interface.
 
 The system is designed to move beyond descriptive SEO reporting and support **forward-looking decisions**: what is likely to happen, where the largest organic-growth opportunities are, which pages deserve action first, and how those decisions can be explained to business stakeholders.
+
+---
+
+## ğŸ“Š Historical SEO Performance Dashboard
+
+A separate interactive dashboard presents the historical organic-growth and e-commerce performance analysis behind the project, including Google Search Console, GA4 and Semrush-based SEO intelligence.
+
+[**View Historical SEO Dashboard**](https://ozlemtonbul.com/dashboards/seo_dashboard.html)
+
+> The historical dashboard presents business-performance evidence, while this repository focuses on the AI/ML decision-intelligence architecture, multi-horizon forecasting, automation, testing and LLM/RAG capabilities.
 
 ---
 
@@ -112,7 +122,7 @@ Backtesting is chronological and designed to avoid target leakage.
 ### Historical Search Console research dataset
 
 - **499 calendar days**
-- **2025-04-05 → 2026-08-16**
+- **2025-04-05 â†’ 2026-08-16**
 - **742,200 page-day rows**
 - **8,437 pages**
 
@@ -164,11 +174,11 @@ The production router checks whether the requested adjustment can be applied wit
 
 In the final accepted production design:
 
-- 90-day click direct ML target hit the guardrail → `RecursiveDailyML`
-- 90-day impressions → `MLOnlyCTREnsembleImpressions`
-- 180-day click direct ML target hit the guardrail → `RecursiveDailyML`
-- 180-day impressions → `RecursiveDailyML`
-- 365-day route → ML hybrid with explicit validation limitation
+- 90-day click direct ML target hit the guardrail â†’ `RecursiveDailyML`
+- 90-day impressions â†’ `MLOnlyCTREnsembleImpressions`
+- 180-day click direct ML target hit the guardrail â†’ `RecursiveDailyML`
+- 180-day impressions â†’ `RecursiveDailyML`
+- 365-day route â†’ ML hybrid with explicit validation limitation
 
 All six primary forecast horizons remain **ML-based**.
 
@@ -181,7 +191,7 @@ Final release validation:
 - Python compile: **PASS**
 - Pipeline data validation: **PASS**
 - Final automated tests: **123 passed**
-- ML daily horizon coverage: **1 → 365**
+- ML daily horizon coverage: **1 â†’ 365**
 - Portfolio horizons: **7 / 14 / 30 / 90 / 180 / 365**
 - Negative ML forecasts: **none**
 - Daily page + forecast-date key: **unique**
@@ -195,9 +205,9 @@ Final pipeline snapshot:
 - Scenario rows: **14,187**
 - Recommendation rows: **1,578**
 - ML daily forecast rows: **688,025**
-- Next-day target validation R² range: **0.9693 → 0.9870**
+- Next-day target validation RÂ² range: **0.9693 â†’ 0.9870**
 
-> The R² values above refer to next-day target validation and are not presented as 90/180/365-day forecast accuracy.
+> The RÂ² values above refer to next-day target validation and are not presented as 90/180/365-day forecast accuracy.
 
 See [`docs/engineering/FINAL_QA.md`](docs/engineering/FINAL_QA.md).
 
@@ -210,7 +220,7 @@ A dedicated automated check verifies that:
 - exactly six horizon rows exist
 - daily ML output covers day 1 through day 365
 - each portfolio horizon reconciles with the cumulative daily forecast
-- 30 → 90 → 180 → 365 values actually change
+- 30 â†’ 90 â†’ 180 â†’ 365 values actually change
 - cumulative clicks and impressions grow with horizon length
 - all primary routes are marked as ML
 - 365 remains explicitly `Unvalidated-HistoryTooShort`
@@ -299,31 +309,31 @@ Security details: [`docs/engineering/PUBLIC_DEMO_SECURITY.md`](docs/engineering/
 
 ```text
 .
-├── config/
-├── dashboard/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-├── docker/
-├── outputs/                  # sanitized public demo outputs
-├── scripts/
-├── src/
-│   ├── extract/
-│   ├── features/
-│   ├── llm/
-│   ├── memory/
-│   ├── models/
-│   ├── rag/
-│   ├── recommendations/
-│   ├── reporting/
-│   ├── utils/
-│   └── warehouse/
-├── tests/
-│   └── final_qa/
-├── Dockerfile
-├── docker-compose.yml
-├── main.py
-└── requirements.txt
+â”œâ”€â”€ config/
+â”œâ”€â”€ dashboard/
+â”‚   â”œâ”€â”€ components/
+â”‚   â”œâ”€â”€ pages/
+â”‚   â””â”€â”€ services/
+â”œâ”€â”€ docker/
+â”œâ”€â”€ outputs/                  # sanitized public demo outputs
+â”œâ”€â”€ scripts/
+â”œâ”€â”€ src/
+â”‚   â”œâ”€â”€ extract/
+â”‚   â”œâ”€â”€ features/
+â”‚   â”œâ”€â”€ llm/
+â”‚   â”œâ”€â”€ memory/
+â”‚   â”œâ”€â”€ models/
+â”‚   â”œâ”€â”€ rag/
+â”‚   â”œâ”€â”€ recommendations/
+â”‚   â”œâ”€â”€ reporting/
+â”‚   â”œâ”€â”€ utils/
+â”‚   â””â”€â”€ warehouse/
+â”œâ”€â”€ tests/
+â”‚   â””â”€â”€ final_qa/
+â”œâ”€â”€ Dockerfile
+â”œâ”€â”€ docker-compose.yml
+â”œâ”€â”€ main.py
+â””â”€â”€ requirements.txt
 ```
 
 ---
@@ -430,35 +440,35 @@ This project emphasizes:
 
 | Capability | Status |
 |---|---|
-| GSC integration | ✅ Implemented |
-| GA4 integration | ✅ Implemented |
-| Feature engineering | ✅ Implemented |
-| ML forecasting | ✅ Implemented |
-| 7/14/30-day operational forecasting | ✅ Backtested |
-| 90/180-day strategic forecasting | ✅ Backtested |
-| 365-day ML forecasting | ⚠️ Implemented; historical validation pending |
-| Pure-ML CTR ensemble | ✅ Implemented |
-| Strategic ML guardrails | ✅ Implemented |
-| Scenario simulation | ✅ Implemented |
-| Recommendation engine | ✅ Implemented |
-| Technical SEO intelligence | ✅ Implemented |
-| Content + GEO intelligence | ✅ Implemented |
-| RAG architecture | ✅ Implemented |
-| Multi-LLM architecture | ✅ Implemented |
-| Streamlit dashboard | ✅ Implemented |
-| Turkish / English UI | ✅ Implemented |
-| PostgreSQL support | ✅ Implemented |
-| Docker support | ✅ Implemented |
-| Sanitized public demo | ✅ Implemented |
-| Final automated QA | ✅ 123 passed |
+| GSC integration | âœ… Implemented |
+| GA4 integration | âœ… Implemented |
+| Feature engineering | âœ… Implemented |
+| ML forecasting | âœ… Implemented |
+| 7/14/30-day operational forecasting | âœ… Backtested |
+| 90/180-day strategic forecasting | âœ… Backtested |
+| 365-day ML forecasting | âš ï¸ Implemented; historical validation pending |
+| Pure-ML CTR ensemble | âœ… Implemented |
+| Strategic ML guardrails | âœ… Implemented |
+| Scenario simulation | âœ… Implemented |
+| Recommendation engine | âœ… Implemented |
+| Technical SEO intelligence | âœ… Implemented |
+| Content + GEO intelligence | âœ… Implemented |
+| RAG architecture | âœ… Implemented |
+| Multi-LLM architecture | âœ… Implemented |
+| Streamlit dashboard | âœ… Implemented |
+| Turkish / English UI | âœ… Implemented |
+| PostgreSQL support | âœ… Implemented |
+| Docker support | âœ… Implemented |
+| Sanitized public demo | âœ… Implemented |
+| Final automated QA | âœ… 123 passed |
 
 ---
 
 ## Author
 
-### Özlem Tonbul
+### Ã–zlem Tonbul
 
-**AI & Data Intelligence · AI Agents · LLMs · Machine Learning · Growth Analytics · SEO Intelligence**
+**AI & Data Intelligence Â· AI Agents Â· LLMs Â· Machine Learning Â· Growth Analytics Â· SEO Intelligence**
 
 Portfolio: `ozlemtonbul.com`  
 GitHub: `github.com/ozlemtonbul`  
@@ -471,3 +481,5 @@ LinkedIn: `linkedin.com/in/ozlemtonbul`
 This repository is provided as a professional engineering and portfolio project.
 
 Production credentials, private datasets and confidential business information are intentionally excluded.
+
+
