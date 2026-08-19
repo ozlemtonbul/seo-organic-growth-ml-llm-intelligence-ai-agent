@@ -23,8 +23,19 @@ sys.path.insert(0, PROJECT_ROOT_STR)
 # APP CONFIG
 # ============================================================
 
-from dashboard.app_config import APP_TITLE
 from dashboard.i18n import t
+from dashboard.routes import (
+    ADVANCED_PAGE_KEYS,
+    INTELLIGENCE_PAGE_KEYS,
+    OVERVIEW_PAGE_KEYS,
+    PAGE_SPECS,
+    SUPPORTED_LANGUAGES,
+    page_icon,
+    page_key_from_slug,
+    page_slug,
+    page_source,
+    page_title,
+)
 from dashboard.url_state import resolve_language_from_url
 
 
@@ -48,112 +59,79 @@ st.set_page_config(
 
 
 # ============================================================
-# LOCALIZED ROUTER LABELS
+# LOCALIZED NAVIGATION SECTIONS
 # ============================================================
 
-labels = {
+section_labels = {
     "tr": {
-        "overview_section": "Genel",
-        "intelligence_section": "Karar Zekâsı",
-        "advanced_section": "Gelişmiş SEO Zekâsı",
-        "home": "Ana Panel",
-        "executive": "Yönetici Özeti",
-        "page_analysis": "Sayfa Analizi",
-        "optimizer": "SEO Fırsat Optimizasyonu",
-        "ai_insights": "AI İçgörüleri",
-        "ask_ai": "AI'a Sor",
-        "technical": "Teknik SEO",
-        "content_geo": "İçerik + GEO Zekâsı",
-        "competitor": "Rakip Zekâsı",
+        "overview": "Genel",
+        "intelligence": "Karar Zekâsı",
+        "advanced": "Gelişmiş SEO Zekâsı",
     },
     "en": {
-        "overview_section": "Overview",
-        "intelligence_section": "Decision Intelligence",
-        "advanced_section": "Advanced SEO Intelligence",
-        "home": "Home",
-        "executive": "Executive Overview",
-        "page_analysis": "Page Analysis",
-        "optimizer": "SEO Opportunity Optimizer",
-        "ai_insights": "AI Insights",
-        "ask_ai": "Ask AI",
-        "technical": "Technical SEO",
-        "content_geo": "Content + GEO Intelligence",
-        "competitor": "Competitor Intelligence",
+        "overview": "Overview",
+        "intelligence": "Decision Intelligence",
+        "advanced": "Advanced SEO Intelligence",
     },
 }
 
-current = labels.get(
-    language,
-    labels["en"],
-)
+current_sections = section_labels.get(language, section_labels["en"])
 
 
 # ============================================================
-# PAGE REGISTRY
+# BILINGUAL PAGE REGISTRY
 # ============================================================
 
-home_page = st.Page(
-    "pages/0_Home.py",
-    title=current["home"],
-    icon="🏠",
+# Streamlit requires every directly addressable page to be registered during
+# the session's initial st.navigation call. Therefore both TR and EN pathname
+# aliases are registered at all times. Only the active language is visible in
+# the native sidebar; the counterpart aliases stay routable but hidden.
+pages_by_language: dict[str, dict[str, object]] = {
+    lang: {} for lang in SUPPORTED_LANGUAGES
+}
+
+for lang in SUPPORTED_LANGUAGES:
+    visibility = "visible" if lang == language else "hidden"
+    for page_key in PAGE_SPECS:
+        pages_by_language[lang][page_key] = st.Page(
+            page_source(page_key),
+            url_path=page_slug(page_key, lang),
+            title=page_title(page_key, lang),
+            icon=page_icon(page_key),
+            visibility=visibility,
+        )
+
+
+def _root_redirect() -> None:
+    """Canonicalize the app root to the localized Home pathname."""
+    st.switch_page(
+        pages_by_language[language]["home"],
+        query_params={"lang": language},
+    )
+
+
+root_redirect_page = st.Page(
+    _root_redirect,
+    title="Localized Home",
     default=True,
+    visibility="hidden",
 )
 
-executive_page = st.Page(
-    "pages/1_Executive_Overview.py",
-    url_path="executive-overview",
-    title=current["executive"],
-    icon="📊",
-)
 
-page_analysis_page = st.Page(
-    "pages/2_Page_Analysis.py",
-    url_path="page-analysis",
-    title=current["page_analysis"],
-    icon="📄",
-)
+def _localized_pair(page_key: str) -> list[object]:
+    """Return active route first and the alternate-language alias second."""
+    alternate_language = "en" if language == "tr" else "tr"
+    return [
+        pages_by_language[language][page_key],
+        pages_by_language[alternate_language][page_key],
+    ]
 
-optimizer_page = st.Page(
-    "pages/3_SEO_Opportunity_Optimizer.py",
-    url_path="seo-opportunity-optimizer",
-    title=current["optimizer"],
-    icon="🎯",
-)
 
-ai_insights_page = st.Page(
-    "pages/4_AI_Insights.py",
-    url_path="ai-insights",
-    title=current["ai_insights"],
-    icon="🧠",
-)
-
-ask_ai_page = st.Page(
-    "pages/5_Ask_AI.py",
-    url_path="ask-ai",
-    title=current["ask_ai"],
-    icon="💬",
-)
-
-technical_page = st.Page(
-    "pages/6_Technical_SEO.py",
-    url_path="technical-seo",
-    title=current["technical"],
-    icon="🛠️",
-)
-
-content_geo_page = st.Page(
-    "pages/7_Content_GEO_Intelligence.py",
-    url_path="content-geo-intelligence",
-    title=current["content_geo"],
-    icon="🧭",
-)
-
-competitor_page = st.Page(
-    "pages/8_Competitor_Intelligence.py",
-    url_path="competitor-intelligence",
-    title=current["competitor"],
-    icon="🔭",
-)
+def _section_pages(page_keys: tuple[str, ...], include_root: bool = False) -> list[object]:
+    pages: list[object] = [root_redirect_page] if include_root else []
+    for page_key in page_keys:
+        pages.extend(_localized_pair(page_key))
+    return pages
 
 
 # ============================================================
@@ -162,23 +140,44 @@ competitor_page = st.Page(
 
 navigation = st.navigation(
     {
-        current["overview_section"]: [
-            home_page,
-            executive_page,
-        ],
-        current["intelligence_section"]: [
-            page_analysis_page,
-            optimizer_page,
-            ai_insights_page,
-            ask_ai_page,
-        ],
-        current["advanced_section"]: [
-            technical_page,
-            content_geo_page,
-            competitor_page,
-        ],
+        current_sections["overview"]: _section_pages(
+            OVERVIEW_PAGE_KEYS,
+            include_root=True,
+        ),
+        current_sections["intelligence"]: _section_pages(
+            INTELLIGENCE_PAGE_KEYS,
+        ),
+        current_sections["advanced"]: _section_pages(
+            ADVANCED_PAGE_KEYS,
+        ),
     },
     position="sidebar",
 )
+
+
+# ============================================================
+# CANONICAL LOCALIZED URL
+# ============================================================
+
+# Root is intentionally a hidden redirect so Home itself can have a localized
+# pathname: /ana-panel?lang=tr or /home?lang=en.
+if navigation.url_path == "":
+    st.switch_page(
+        pages_by_language[language]["home"],
+        query_params={"lang": language},
+    )
+
+# If the language selector changed while the user stayed on the same logical
+# page, st.navigation may initially resolve the old-language alias. Redirect
+# to the counterpart alias before executing the page so pathname + ?lang stay
+# in sync (e.g. /teknik-seo?lang=tr <-> /technical-seo?lang=en).
+page_key = page_key_from_slug(navigation.url_path)
+if page_key is not None:
+    canonical_page = pages_by_language[language][page_key]
+    if navigation.url_path != canonical_page.url_path:
+        st.switch_page(
+            canonical_page,
+            query_params={"lang": language},
+        )
 
 navigation.run()

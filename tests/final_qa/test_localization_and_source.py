@@ -55,7 +55,13 @@ def test_single_router_navigation_contract():
     assert "st.navigation(" in source
     assert "navigation.run()" in source
     assert "st.page_link(" not in source
-    assert "st.switch_page(" not in source
+
+    # Localized pathname canonicalization intentionally uses st.switch_page.
+    # Every redirect must explicitly preserve the active ?lang=tr/en value.
+    assert "st.switch_page(" in source
+    assert 'query_params={"lang": language}' in source
+    assert "pages_by_language" in source
+    assert 'visibility = "visible" if lang == language else "hidden"' in source
 
 
 def test_duplicate_executive_analysis_button_is_removed():
@@ -216,7 +222,8 @@ def test_initialize_dashboard_headings_are_language_aware():
 
 
 def test_router_contains_both_tr_and_en_labels():
-    source = (DASHBOARD_ROOT / "app.py").read_text(encoding="utf-8-sig")
+    # Page labels now live in the centralized bilingual route registry.
+    source = (DASHBOARD_ROOT / "routes.py").read_text(encoding="utf-8-sig")
 
     required_tr = [
         "Ana Panel",
@@ -243,6 +250,39 @@ def test_router_contains_both_tr_and_en_labels():
 
     for label in required_tr + required_en:
         assert label in source, f"Router localization label missing: {label}"
+
+
+def test_router_contains_complete_localized_slug_pairs():
+    from dashboard.routes import PAGE_SPECS, page_key_from_slug, page_slug
+
+    expected = {
+        "home": {"tr": "ana-panel", "en": "home"},
+        "executive": {"tr": "yonetici-ozeti", "en": "executive-overview"},
+        "page_analysis": {"tr": "sayfa-analizi", "en": "page-analysis"},
+        "optimizer": {
+            "tr": "seo-firsat-optimizasyonu",
+            "en": "seo-opportunity-optimizer",
+        },
+        "ai_insights": {"tr": "ai-icgoruleri", "en": "ai-insights"},
+        "ask_ai": {"tr": "ai-a-sor", "en": "ask-ai"},
+        "technical": {"tr": "teknik-seo", "en": "technical-seo"},
+        "content_geo": {
+            "tr": "icerik-geo-zekasi",
+            "en": "content-geo-intelligence",
+        },
+        "competitor": {"tr": "rakip-zekasi", "en": "competitor-intelligence"},
+    }
+
+    assert set(PAGE_SPECS) == set(expected)
+
+    all_slugs = []
+    for page_key, languages in expected.items():
+        for language, slug in languages.items():
+            assert page_slug(page_key, language) == slug
+            assert page_key_from_slug(slug) == page_key
+            all_slugs.append(slug)
+
+    assert len(all_slugs) == len(set(all_slugs)), "Localized URL slugs must be unique"
 
 
 def test_application_display_title_is_localized():
@@ -411,30 +451,70 @@ def test_localized_dataframe_values_follow_active_language():
     assert en.loc[0, "PriorityTier"] == "High Priority"
     assert en.loc[0, "ConfidenceLevel"] == "High"
 
-def test_router_uses_clean_shareable_url_paths():
-    source = (DASHBOARD_ROOT / "app.py").read_text(encoding="utf-8-sig")
+def test_router_has_localized_tr_and_en_url_paths():
+    routes_source = (DASHBOARD_ROOT / "routes.py").read_text(encoding="utf-8-sig")
+    app_source = (DASHBOARD_ROOT / "app.py").read_text(encoding="utf-8-sig")
 
-    expected_paths = [
-        'url_path="executive-overview"',
-        'url_path="page-analysis"',
-        'url_path="seo-opportunity-optimizer"',
-        'url_path="ai-insights"',
-        'url_path="ask-ai"',
-        'url_path="technical-seo"',
-        'url_path="content-geo-intelligence"',
-        'url_path="competitor-intelligence"',
+    expected_tr = [
+        '"ana-panel"',
+        '"yonetici-ozeti"',
+        '"sayfa-analizi"',
+        '"seo-firsat-optimizasyonu"',
+        '"ai-icgoruleri"',
+        '"ai-a-sor"',
+        '"teknik-seo"',
+        '"icerik-geo-zekasi"',
+        '"rakip-zekasi"',
+    ]
+    expected_en = [
+        '"home"',
+        '"executive-overview"',
+        '"page-analysis"',
+        '"seo-opportunity-optimizer"',
+        '"ai-insights"',
+        '"ask-ai"',
+        '"technical-seo"',
+        '"content-geo-intelligence"',
+        '"competitor-intelligence"',
     ]
 
-    for expected in expected_paths:
-        assert expected in source, f"Clean Streamlit url_path missing: {expected}"
+    for expected in expected_tr + expected_en:
+        assert expected in routes_source, f"Localized route missing: {expected}"
 
-    # Streamlit url_path values must stay flat (no forward slashes).
-    for expected in expected_paths:
-        value = expected.split('"', 2)[1]
-        assert "/" not in value
+    assert 'visibility="hidden"' in app_source
+    assert "page_key_from_slug(navigation.url_path)" in app_source
+    assert 'query_params={"lang": language}' in app_source
+    assert "navigation.url_path != canonical_page.url_path" in app_source
 
 
-def test_language_is_synchronized_between_url_and_session_state():
+def test_localized_route_contract_is_complete_and_flat():
+    from dashboard.routes import PAGE_SPECS, SUPPORTED_LANGUAGES, page_slug
+
+    assert set(PAGE_SPECS) == {
+        "home",
+        "executive",
+        "page_analysis",
+        "optimizer",
+        "ai_insights",
+        "ask_ai",
+        "technical",
+        "content_geo",
+        "competitor",
+    }
+
+    slugs = []
+    for page_key in PAGE_SPECS:
+        for language in SUPPORTED_LANGUAGES:
+            slug = page_slug(page_key, language)
+            assert slug
+            assert "/" not in slug
+            slugs.append(slug)
+
+    assert len(slugs) == 18
+    assert len(set(slugs)) == 18
+
+
+def test_language_is_synchronized_between_url_session_and_localized_path():
     app_source = (DASHBOARD_ROOT / "app.py").read_text(encoding="utf-8-sig")
     layout_source = (DASHBOARD_ROOT / "layout.py").read_text(encoding="utf-8-sig")
     url_state_source = (DASHBOARD_ROOT / "url_state.py").read_text(encoding="utf-8-sig")
@@ -449,9 +529,19 @@ def test_language_is_synchronized_between_url_and_session_state():
     assert 'st.session_state["dashboard_language"]' in url_state_source
     assert "url_language or session_language" in url_state_source
 
+    # The entrypoint performs pathname canonicalization after navigation
+    # resolution, preserving the same logical page across a language switch.
+    assert "page_key_from_slug(navigation.url_path)" in app_source
+    assert "st.switch_page(" in app_source
+
 
 def test_language_url_module_compiles_without_bom():
     source = (DASHBOARD_ROOT / "url_state.py").read_text(encoding="utf-8")
     assert not source.startswith("\\ufeff")
     compile(source, str(DASHBOARD_ROOT / "url_state.py"), "exec")
 
+
+def test_routes_module_compiles_without_bom():
+    source = (DASHBOARD_ROOT / "routes.py").read_text(encoding="utf-8")
+    assert not source.startswith("\\ufeff")
+    compile(source, str(DASHBOARD_ROOT / "routes.py"), "exec")
