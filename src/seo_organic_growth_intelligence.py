@@ -1,6 +1,6 @@
 
 """
-Vicco SEO Organic Growth Intelligence Pipeline
+Demo Store SEO Organic Growth Intelligence Pipeline
 
 This project is a Python-based predictive decision-support system designed to
 optimize organic growth performance using machine learning, scenario simulation,

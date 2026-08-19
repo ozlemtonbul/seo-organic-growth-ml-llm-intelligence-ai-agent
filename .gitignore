@@ -1,5 +1,42 @@
+# Secrets
 .env
-output/
+.env.*
+!.env.example
+credentials/
+**/*service-account*.json
+**/*service_account*.json
+**/*client_secret*.json
+google-ads.yaml
+google_ads.yaml
+
+# Private/local data
+data/raw/
+data/private/
+data/historical/
+outputs/backups/
+outputs/final_qa_report.txt
+*.db
+*.sqlite
+*.sqlite3
+*.parquet
+*.pkl
+*.pickle
+*.joblib
+
+# Python / tooling
+.venv/
+venv/
 __pycache__/
-*.pyc
-*.log
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local patch bundles
+*.zip

@@ -1,0 +1,102 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: seo-intelligence-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DATABASE:-seo_intelligence}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+
+    ports:
+      - "${POSTGRES_EXTERNAL_PORT:-5433}:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DATABASE:-seo_intelligence}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: seo-organic-growth-intelligence
+    restart: "no"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    env_file:
+      - .env
+
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE:-seo_intelligence}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+
+    volumes:
+      - ./outputs:/app/outputs
+      - ./credentials:/app/credentials:ro
+
+    command:
+      [
+        "python",
+        "main.py"
+      ]
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: seo-organic-growth-scheduler
+    restart: unless-stopped
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    env_file:
+      - .env
+
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE:-seo_intelligence}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+
+      SCHEDULER_ENABLED: "true"
+      SCHEDULER_TIMEZONE: ${SCHEDULER_TIMEZONE:-Europe/Istanbul}
+      SCHEDULER_HOUR: ${SCHEDULER_HOUR:-6}
+      SCHEDULER_MINUTE: ${SCHEDULER_MINUTE:-0}
+      SCHEDULER_POLL_SECONDS: ${SCHEDULER_POLL_SECONDS:-30}
+      SCHEDULER_RUN_ON_START: ${SCHEDULER_RUN_ON_START:-false}
+      SCHEDULER_STALE_LOCK_MINUTES: ${SCHEDULER_STALE_LOCK_MINUTES:-240}
+
+    volumes:
+      - ./outputs:/app/outputs
+      - ./credentials:/app/credentials:ro
+
+    command:
+      [
+        "python",
+        "scheduler.py"
+      ]
+
+volumes:
+  postgres_data:
