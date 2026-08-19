@@ -1,0 +1,31 @@
+{
+  "project": "SEO & GEO Decision Intelligence AI Agent",
+  "final_qa": {
+    "python_compile": "PASS",
+    "pipeline_validation": "PASS",
+    "pytest": "123 passed"
+  },
+  "ml_horizons": [
+    7,
+    14,
+    30,
+    90,
+    180,
+    365
+  ],
+  "gsc_research_history": {
+    "calendar_days": 499,
+    "date_start": "2025-04-05",
+    "date_end": "2026-08-16",
+    "rows": 742200,
+    "pages": 8437
+  },
+  "demo": {
+    "sanitized_csv_files": 114,
+    "rows": 17790,
+    "anonymized_pages": 15,
+    "security_scan": "PASS"
+  },
+  "validation_365": "Unvalidated-HistoryTooShort",
+  "public_repo_note": "No production credentials or private raw client datasets are intended to be included."
+}
